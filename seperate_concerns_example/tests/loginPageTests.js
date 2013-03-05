@@ -14,6 +14,7 @@ TestCase("Tests", {
 		loginPageLogic.validateCredentials();
 		verify(loginPageViewMock).showInvalidCredentialsError();
 	},
+
 	test_calls_auth_service_with_correct_callbacks : function () {
 		var loginPageViewMock = mock(LoginPageView);
 		var authServiceMock = mock(AuthenticationService);

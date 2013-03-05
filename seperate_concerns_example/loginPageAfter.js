@@ -27,7 +27,7 @@ browser.Animations = {
 
 function LoginPageLogic(view, authenticationService) {
 	this.init = function () {
-		view.addLoginHandler(this.validateCredentials)
+		view.onLogin(this.validateCredentials)
 	};
 	function credentialsAreValid(username, password) {
 		return (username && username !== "") && (password && password !== "");
@@ -52,14 +52,24 @@ function AuthenticationService(serviceUrl) {
 	};
 }
 
+function test() {
+    var browser = {HTTP: {post: function() {return true}}}
+    when:
+    var service = new AuthenticationService(url);
+}
+
 function LoginPageView() {
+
+    this.getSelector = function(selector) {
+        return $(selector).val();
+    }
 	this.getUsername = function () {
 		return $("#username").val();
 	};
 	this.getPassword = function () {
 		return $("#password").val();
 	};
-	this.addLoginHandler = function (callback) {
+	this.onLogin = function (callback) {
 		$("#loginButton").click(function (e) {
 			e.preventDefault();
 			callback();
